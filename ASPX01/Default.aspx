@@ -10,9 +10,6 @@
 <body>
     <h1>5 INF B - ASPX</h1>
     <form id="form1" runat="server">
-        <h5>Filtra per classe:
-            <asp:DropDownList ID="cmbClasse" runat="server" AutoPostBack="true" OnSelectedIndexChanged="cmbClasse_SelectedIndexChanged"></asp:DropDownList>
-        </h5>
         <%--<div>
             <!-- <% Response.Write("<b> Pagina di registrazione </b>");%> <br /> -->
             UserName <asp:TextBox ID="txtUserName" runat="server"/> <br />
@@ -20,6 +17,23 @@
             <asp:Button ID="btnInvia" runat="server" Text="Invia" /> <br />
             <asp:Label ID="lblMessaggio" runat="server" Text=" "> </asp:Label>
         </div>--%>
+        <h5>Filtra per classe:
+            <asp:DropDownList ID="cmbClasse" runat="server" AutoPostBack="true" OnSelectedIndexChanged="cmbClasse_SelectedIndexChanged"></asp:DropDownList>
+        </h5>
+        <h5>
+            Filtra per genere:
+            <asp:RadioButton ID="rbMale" runat="server" Text="M" GroupName="gender" OnCheckedChanged="rbGender_CheckedChanged" AutoPostBack="true" />
+            &nbsp;&nbsp;
+            <asp:RadioButton ID="rbFemale" runat="server" Text="F" GroupName="gender" OnCheckedChanged="rbGender_CheckedChanged" AutoPostBack="true" />
+            &nbsp;&nbsp;
+            <asp:RadioButton ID="rbAll" runat="server" Text="ALL" GroupName="gender" Checked="true" OnCheckedChanged="rbGender_CheckedChanged" AutoPostBack="true" />
+        </h5>
+        <h5>
+            Filtra per cognome:
+            <asp:TextBox ID="txtCognome" runat="server"></asp:TextBox>
+            &nbsp;&nbsp;
+            <asp:Button ID="btnCerca" runat="server" Text="Visualizza Dettagli" OnClick="btnCerca_Click" />
+        </h5>
         <asp:GridView ID="gridStudenti" runat="server"></asp:GridView>
     </form>
 </body>

@@ -49,6 +49,28 @@ namespace ASPX01
             }
             gridStudenti.DataSource = db.GetDataTable(sql);
             gridStudenti.DataBind();
+            rbAll.Checked = true;
+        }
+
+        protected void rbGender_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            string sql = "SELECT Cognome, Nome, Classe, Genere, AnnoNascita FROM Studenti, Classi WHERE Studenti.IdClasse=Classi.Id";
+            if (rb.Checked && rb.ID != "rbAll")
+            {
+                sql += " AND Genere = '" + rb.Text + "'";
+            }
+            gridStudenti.DataSource = db.GetDataTable(sql);
+            gridStudenti.DataBind();
+            cmbClasse.SelectedIndex = 0;
+        }
+
+        protected void btnCerca_Click(object sender, EventArgs e)
+        {
+            if (txtCognome.Text.Length > 0)
+            {
+                Response.Redirect("Dettagli.aspx?cognome=" + txtCognome.Text);
+            }
         }
     }
 }

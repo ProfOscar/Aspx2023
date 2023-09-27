@@ -11,7 +11,7 @@ namespace ASPX01
 {
 
 
-    public partial class Default
+    public partial class Dettagli
     {
 
         /// <summary>
@@ -24,66 +24,75 @@ namespace ASPX01
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Controllo cmbClasse.
+        /// Controllo pnlData.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbClasse;
+        protected global::System.Web.UI.WebControls.Panel pnlData;
 
         /// <summary>
-        /// Controllo rbMale.
+        /// Controllo lblNome.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbMale;
+        protected global::System.Web.UI.WebControls.Label lblNome;
 
         /// <summary>
-        /// Controllo rbFemale.
+        /// Controllo lblCognome.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbFemale;
+        protected global::System.Web.UI.WebControls.Label lblCognome;
 
         /// <summary>
-        /// Controllo rbAll.
+        /// Controllo lblGenere.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rbAll;
+        protected global::System.Web.UI.WebControls.Label lblGenere;
 
         /// <summary>
-        /// Controllo txtCognome.
+        /// Controllo lblClasse.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCognome;
+        protected global::System.Web.UI.WebControls.Label lblClasse;
 
         /// <summary>
-        /// Controllo btnCerca.
+        /// Controllo lblAnnoNascita.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCerca;
+        protected global::System.Web.UI.WebControls.Label lblAnnoNascita;
 
         /// <summary>
-        /// Controllo gridStudenti.
+        /// Controllo pnlNotFound.
         /// </summary>
         /// <remarks>
         /// Campo generato automaticamente.
         /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridStudenti;
+        protected global::System.Web.UI.WebControls.Panel pnlNotFound;
+
+        /// <summary>
+        /// Controllo btnHome.
+        /// </summary>
+        /// <remarks>
+        /// Campo generato automaticamente.
+        /// Per la modifica, spostare la dichiarazione di campo dal file di progettazione al file code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHome;
     }
 }
