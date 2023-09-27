@@ -12,6 +12,9 @@ namespace ASPX01
     public partial class Dettagli : System.Web.UI.Page
     {
         DbTools db;
+        DataTable table;
+        int index = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string cogn = Request.QueryString["cognome"];
@@ -21,14 +24,11 @@ namespace ASPX01
             string connStr = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" +
                 dbPath + ";Integrated Security=True;Connect Timeout=30";
             db = new DbTools(connStr);
-            DataTable table = db.GetDataTable(sql);
+            table = db.GetDataTable(sql);
             if (table.Rows.Count > 0)
             {
-                lblNome.Text = table.Rows[0]["Nome"].ToString();
-                lblCognome.Text = table.Rows[0]["Cognome"].ToString();
-                lblClasse.Text = table.Rows[0]["Classe"].ToString();
-                lblGenere.Text = table.Rows[0]["Genere"].ToString();
-                lblAnnoNascita.Text = table.Rows[0]["AnnoNascita"].ToString();
+                assignData();
+                if (table.Rows.Count > 1) pnlPrevNext.Visible = true;
             }
             else
             {
@@ -40,6 +40,28 @@ namespace ASPX01
         protected void btnHome_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx");
+        }
+
+        protected void btnPrev_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnNext_Click(object sender, EventArgs e)
+        {
+            index++;
+            assignData();
+            btnPrev.Enabled = true;
+            if (index == table.Rows.Count - 1) btnNext.Enabled = false;
+        }
+
+        protected void assignData()
+        {
+            lblNome.Text = table.Rows[index]["Nome"].ToString();
+            lblCognome.Text = table.Rows[index]["Cognome"].ToString();
+            lblClasse.Text = table.Rows[index]["Classe"].ToString();
+            lblGenere.Text = table.Rows[index]["Genere"].ToString();
+            lblAnnoNascita.Text = table.Rows[index]["AnnoNascita"].ToString();
         }
     }
 }
