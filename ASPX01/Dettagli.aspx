@@ -29,8 +29,8 @@
             <h5>STUDENTE NON TROVATO</h5>
         </asp:Panel>
         <asp:Panel ID="pnlPrevNext" runat="server" Visible="false">
-            <asp:Button ID="btnPrev" runat="server" Text="PREVIOUS" OnClick="btnPrev_Click" onclientclick="Javascript:return false;" Enabled="false" />
-            <asp:Button ID="btnNext" runat="server" Text="NEXT" OnClick="btnNext_Click" CausesValidation="false" />
+            <asp:Button ID="btnPrev" runat="server" Text="PREVIOUS" OnClick="btnPrev_Click" Enabled="false" />
+            <asp:Button ID="btnNext" runat="server" Text="NEXT" OnClick="btnNext_Click" />
         </asp:Panel>
         <p></p>
         <asp:Button ID="btnHome" runat="server" Text="HOMEPAGE" OnClick="btnHome_Click" />

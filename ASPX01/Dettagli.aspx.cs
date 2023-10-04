@@ -17,23 +17,33 @@ namespace ASPX01
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string cogn = Request.QueryString["cognome"];
-            string sql = "SELECT Cognome, Nome, Classe, Genere, AnnoNascita FROM Studenti, Classi WHERE Studenti.IdClasse=Classi.Id";
-            sql += " AND Cognome='" + cogn + "'";
-            string dbPath = Server.MapPath("App_Data/Studenti.mdf");
-            string connStr = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" +
-                dbPath + ";Integrated Security=True;Connect Timeout=30";
-            db = new DbTools(connStr);
-            table = db.GetDataTable(sql);
-            if (table.Rows.Count > 0)
+            if (!Page.IsPostBack)
             {
-                assignData();
-                if (table.Rows.Count > 1) pnlPrevNext.Visible = true;
+                string cogn = Request.QueryString["cognome"];
+                string sql = "SELECT Cognome, Nome, Classe, Genere, AnnoNascita FROM Studenti, Classi WHERE Studenti.IdClasse=Classi.Id";
+                sql += " AND Cognome='" + cogn + "'";
+                string dbPath = Server.MapPath("App_Data/Studenti.mdf");
+                string connStr = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=" +
+                    dbPath + ";Integrated Security=True;Connect Timeout=30";
+                db = new DbTools(connStr);
+                table = db.GetDataTable(sql);
+                if (table.Rows.Count > 0)
+                {
+                    assignData();
+                    if (table.Rows.Count > 1) pnlPrevNext.Visible = true;
+                }
+                else
+                {
+                    pnlData.Visible = false;
+                    pnlNotFound.Visible = true;
+                }
+                ViewState["StudentTable"] = table;
+                ViewState["index"] = index;
             }
             else
             {
-                pnlData.Visible = false;
-                pnlNotFound.Visible = true;
+                table = (DataTable)ViewState["StudentTable"];
+                index = (int)ViewState["index"];
             }
         }
 
@@ -44,7 +54,11 @@ namespace ASPX01
 
         protected void btnPrev_Click(object sender, EventArgs e)
         {
-
+            index--;
+            assignData();
+            btnNext.Enabled = true;
+            if (index == 0) btnPrev.Enabled = false;
+            ViewState["index"] = index;
         }
 
         protected void btnNext_Click(object sender, EventArgs e)
@@ -53,6 +67,7 @@ namespace ASPX01
             assignData();
             btnPrev.Enabled = true;
             if (index == table.Rows.Count - 1) btnNext.Enabled = false;
+            ViewState["index"] = index;
         }
 
         protected void assignData()
