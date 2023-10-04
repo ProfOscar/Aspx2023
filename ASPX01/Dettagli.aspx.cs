@@ -19,6 +19,10 @@ namespace ASPX01
         {
             if (!Page.IsPostBack)
             {
+                // RECUPERO ORA CONNESSIONE DALLA SESSION
+                lblConnectionTime.Text = Session["OraConnessione"].ToString();
+
+                // CARICO LA TABELLA FILTRATA
                 string cogn = Request.QueryString["cognome"];
                 string sql = "SELECT Cognome, Nome, Classe, Genere, AnnoNascita FROM Studenti, Classi WHERE Studenti.IdClasse=Classi.Id";
                 sql += " AND Cognome='" + cogn + "'";

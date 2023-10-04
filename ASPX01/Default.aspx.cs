@@ -24,6 +24,29 @@ namespace ASPX01
 
             if (!Page.IsPostBack)   // al primo avvio della webapp
             {
+                // SCRIVO LO USER AGENT
+                lblUserAgent.Text = Request.ServerVariables["HTTP_USER_AGENT"];
+
+                // SCRIVO E MEMORIZZO (oppure leggo) LA DATA E ORA DI PRIMA CONNESSIONE
+                if (Session["OraConnessione"] == null)
+                {
+                    string oraConnessione = DateTime.Now.ToLongTimeString();
+                    lblConnectionTime.Text = oraConnessione;
+                    Session["OraConnessione"] = oraConnessione;
+                }
+                else
+                {
+                    lblConnectionTime.Text = Session["OraConnessione"].ToString();
+                }
+
+                // SCRIVO E MEMORIZZO (oppure leggo) IL CONTATORE DI VISITE
+                int count = Application["Contatore"] == null ? 0 : (int)Application["Contatore"];
+                count++;
+                lblCounter.Text = count.ToString();
+                Application.Lock();
+                Application["Contatore"] = count;
+                Application.UnLock();
+
                 // RIEMPIO LA COMBO
                 cmbClasse.DataSource = db.GetDataTable("SELECT * FROM Classi ORDER BY Classe");
                 cmbClasse.DataTextField = "Classe";
@@ -36,7 +59,10 @@ namespace ASPX01
                     "WHERE Studenti.IdClasse=Classi.Id";
                 gridStudenti.DataSource = db.GetDataTable(sql);
                 gridStudenti.DataBind();
-
+            }
+            else
+            {
+                lblConnectionTime.Text = Session["OraConnessione"].ToString();
             }
         }
 

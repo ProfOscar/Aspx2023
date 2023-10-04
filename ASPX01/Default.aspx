@@ -9,6 +9,9 @@
 </head>
 <body>
     <h1>5 INF B - ASPX</h1>
+    <p>USER AGENT: <asp:Label ID="lblUserAgent" runat="server" Text=""></asp:Label></p>
+    <p>CONTATORE VISITE: <asp:Label ID="lblCounter" runat="server" Text=""></asp:Label></p>
+    <p>UTENTE ONLINE DALLE <asp:Label ID="lblConnectionTime" runat="server" Text=""></asp:Label></p>
     <form id="form1" runat="server">
         <%--<div>
             <!-- <% Response.Write("<b> Pagina di registrazione </b>");%> <br /> -->
