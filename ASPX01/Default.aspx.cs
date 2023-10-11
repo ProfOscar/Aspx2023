@@ -27,6 +27,17 @@ namespace ASPX01
                 // SCRIVO LO USER AGENT
                 lblUserAgent.Text = Request.ServerVariables["HTTP_USER_AGENT"];
 
+                // SCRIVO E MEMORIZZO (oppure leggo) IL CONTATORE DI VISITE
+                int count = Application["Contatore"] == null ? 0 : (int)Application["Contatore"];
+                if (Session["OraConnessione"] == null)  // per evitare di incrementare quando torno da altre pagine
+                {
+                    count++;
+                    Application.Lock();
+                    Application["Contatore"] = count;
+                    Application.UnLock();
+                }
+                lblCounter.Text = count.ToString();
+
                 // SCRIVO E MEMORIZZO (oppure leggo) LA DATA E ORA DI PRIMA CONNESSIONE
                 if (Session["OraConnessione"] == null)
                 {
@@ -38,14 +49,6 @@ namespace ASPX01
                 {
                     lblConnectionTime.Text = Session["OraConnessione"].ToString();
                 }
-
-                // SCRIVO E MEMORIZZO (oppure leggo) IL CONTATORE DI VISITE
-                int count = Application["Contatore"] == null ? 0 : (int)Application["Contatore"];
-                count++;
-                lblCounter.Text = count.ToString();
-                Application.Lock();
-                Application["Contatore"] = count;
-                Application.UnLock();
 
                 // RIEMPIO LA COMBO
                 cmbClasse.DataSource = db.GetDataTable("SELECT * FROM Classi ORDER BY Classe");
