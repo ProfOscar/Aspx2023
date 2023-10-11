@@ -58,10 +58,21 @@ namespace ASPX01
                 cmbClasse.Items.Insert(0, "(tutte)");
 
                 // RIEMPIO LA GRIGLIA
-                string sql = "SELECT Cognome, Nome, Classe, Genere, AnnoNascita FROM Studenti, Classi " +
+                if (Request.Cookies["classIndex"] != null)
+                {
+                    // Se esiste un cookie con la classe filtrata, la query filtrerà per classe
+                    string cookieValue = Request.Cookies["classIndex"].Value;
+                    cmbClasse.SelectedIndex = int.Parse(cookieValue);
+                    cmbClasse_SelectedIndexChanged(sender, EventArgs.Empty);
+                }
+                else
+                {
+                    // altrimenti la query selezionerà tutti gli studenti
+                    string sql = "SELECT Cognome, Nome, Classe, Genere, AnnoNascita FROM Studenti, Classi " +
                     "WHERE Studenti.IdClasse=Classi.Id";
-                gridStudenti.DataSource = db.GetDataTable(sql);
-                gridStudenti.DataBind();
+                    gridStudenti.DataSource = db.GetDataTable(sql);
+                    gridStudenti.DataBind();
+                }
             }
             else
             {
@@ -79,6 +90,10 @@ namespace ASPX01
             gridStudenti.DataSource = db.GetDataTable(sql);
             gridStudenti.DataBind();
             rbAll.Checked = true;
+            // Setto il cookie per filtrare l'ultima classe selezionata all'apertura del sito
+            HttpCookie classIndexCookie = new HttpCookie("classIndex", cmbClasse.SelectedIndex.ToString());
+            classIndexCookie.Expires = DateTime.Now.AddDays(10);
+            Response.Cookies.Add(classIndexCookie);
         }
 
         protected void rbGender_CheckedChanged(object sender, EventArgs e)
